@@ -53,9 +53,13 @@ class Tableau1 extends Phaser.Scene{
                 brique.body.setAllowGravity(false);
                 brique.setImmovable(true);
                 brique.setVisible(true);
-                this.physics.add.collider(this.balle,brique);
+                this.physics.add.collider(this.balle,brique, function (){
+                    brique.destroy(true)
+                });
 
             }
+
+
         }
 
 
