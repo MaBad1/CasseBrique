@@ -37,44 +37,25 @@ class Tableau1 extends Phaser.Scene{
 
         //raquette
         this.raquette=this.physics.add.sprite(this.largeur/2,this.hauteur-20,'carre').setOrigin(0,0);
-        this.raquette.setDisplaySize(150,20);
+        this.raquette.setDisplaySize(200,20);
         this.raquette.body.setAllowGravity(false);
         this.raquette.setImmovable(true);
 
         let me=this;
 
-        //briques
-        let briques = []
+        //briques placées avec un tableau
 
-        for(let i=1; i<=9; i++){
-            briques[i] = this.physics.add.sprite(60+(i*61),100,'carre').setOrigin(0,0);
-            briques[i].setDisplaySize(60,30);
-            briques[i].body.setAllowGravity(false);
-            briques[i].setImmovable(true);
-        }
-        for(let i=1; i<=9; i++){
-            briques[i] = this.physics.add.sprite(60+(i*61),131,'carre').setOrigin(0,0);
-            briques[i].setDisplaySize(60,30);
-            briques[i].body.setAllowGravity(false);
-            briques[i].setImmovable(true);
-        }
-        for(let i=1; i<=9; i++){
-            briques[i] = this.physics.add.sprite(60+(i*61),162,'carre').setOrigin(0,0);
-            briques[i].setDisplaySize(60,30);
-            briques[i].body.setAllowGravity(false);
-            briques[i].setImmovable(true);
-        }
-        for(let i=1; i<=9; i++){
-            briques[i] = this.physics.add.sprite(60+(i*61),193,'carre').setOrigin(0,0);
-            briques[i].setDisplaySize(60,30);
-            briques[i].body.setAllowGravity(false);
-            briques[i].setImmovable(true);
-        }
-        for(let i=1; i<=9; i++){
-            briques[i] = this.physics.add.sprite(60+(i*61),224,'carre').setOrigin(0,0);
-            briques[i].setDisplaySize(60,30);
-            briques[i].body.setAllowGravity(false);
-            briques[i].setImmovable(true);
+        for(let j=1; j<=5; j++){
+            for(let i=1; i<=9; i++){
+
+                let brique=  this.physics.add.sprite(60+(i*61),100+(j*31),'carre').setOrigin(0,0);
+                brique.setDisplaySize(60,30);
+                brique.body.setAllowGravity(false);
+                brique.setImmovable(true);
+                brique.setVisible(true);
+                this.physics.add.collider(this.balle,brique);
+
+            }
         }
 
 
@@ -91,6 +72,7 @@ class Tableau1 extends Phaser.Scene{
         this.physics.add.collider(this.balle,this.raquette, function (){
             me.rebond(me.raquette);
         });
+
 
         this.initKeyboard();
     }
@@ -121,7 +103,6 @@ class Tableau1 extends Phaser.Scene{
 
     win(joueur){
 
-        joueur.score ++;
     }
 
 
@@ -142,7 +123,7 @@ class Tableau1 extends Phaser.Scene{
                     break;
 
                 case Phaser.Input.Keyboard.KeyCodes.RIGHT:
-                    if(me.raquette.x>630){
+                    if(me.raquette.x>580){
                         me.raquette.setVelocityX(0)
                     }
                     else{
