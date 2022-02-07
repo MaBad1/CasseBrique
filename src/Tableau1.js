@@ -56,6 +56,12 @@ class Tableau1 extends Phaser.Scene{
                 this.physics.add.collider(this.balle,brique, function (){
                     brique.destroy(true)
                 });
+                if(i==4 && j==4){
+                    brique.setTintFill(0x00ff00);
+                }
+                if(i==5 && j==4){
+                    brique.setTintFill(0xff0000);
+                }
 
             }
 
