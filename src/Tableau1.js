@@ -90,6 +90,7 @@ class Tableau1 extends Phaser.Scene{
         this.initKeyboard();
     }
 
+    //reset de la balle
     reset(){
         if(this.balle.y>800){
             this.balle.setX(this.largeur/2);
@@ -114,6 +115,7 @@ class Tableau1 extends Phaser.Scene{
 
     }
 
+    //gain de score pour le joueur (inutile, j'ai pas réussi à l'utiliser correctement)
     win(joueur){
         joueur.score ++;
     }
@@ -123,7 +125,7 @@ class Tableau1 extends Phaser.Scene{
         let me=this;
         this.input.keyboard.on('keydown', function(kevent) {
 
-            //inputs pour avoir un movement et un arrêt simultané des raquettes en gardant un même écart entre les raquettes du milieu de terrain.
+            //inputs de la raquette
 
             switch (kevent.keyCode) {
                 case Phaser.Input.Keyboard.KeyCodes.LEFT:
