@@ -56,6 +56,7 @@ class Tableau1 extends Phaser.Scene{
                 this.physics.add.collider(this.balle,brique, function (){
                     brique.destroy(true)
                 });
+                //couleur des briques spéciales
                 if(i==4 && j==4){
                     brique.setTintFill(0x00ff00);
                 }
@@ -70,6 +71,8 @@ class Tableau1 extends Phaser.Scene{
 
 
         //joueur
+
+        this.joueur = new Joueur('j1','Jscore')
 
         //colliders
 
@@ -112,7 +115,7 @@ class Tableau1 extends Phaser.Scene{
     }
 
     win(joueur){
-
+        joueur.score ++;
     }
 
 
