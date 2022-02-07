@@ -16,7 +16,7 @@ class Tableau1 extends Phaser.Scene{
         this.balle.setDisplaySize(20,20);
         this.balle.body.setBounce(1.1,1.1);
         this.balle.body.setMaxVelocity(500,500);
-        this.Initiale();
+        this.balle.setVelocityY(200);
 
         //Limites haute et basse du terrain
 
@@ -37,11 +37,48 @@ class Tableau1 extends Phaser.Scene{
 
         //raquette
         this.raquette=this.physics.add.sprite(this.largeur/2,this.hauteur-20,'carre').setOrigin(0,0);
-        this.raquette.setDisplaySize(100,20);
+        this.raquette.setDisplaySize(150,20);
         this.raquette.body.setAllowGravity(false);
         this.raquette.setImmovable(true);
 
         let me=this;
+
+        //briques
+        let briques = []
+
+        for(let i=1; i<=9; i++){
+            briques[i] = this.physics.add.sprite(60+(i*61),100,'carre').setOrigin(0,0);
+            briques[i].setDisplaySize(60,30);
+            briques[i].body.setAllowGravity(false);
+            briques[i].setImmovable(true);
+        }
+        for(let i=1; i<=9; i++){
+            briques[i] = this.physics.add.sprite(60+(i*61),131,'carre').setOrigin(0,0);
+            briques[i].setDisplaySize(60,30);
+            briques[i].body.setAllowGravity(false);
+            briques[i].setImmovable(true);
+        }
+        for(let i=1; i<=9; i++){
+            briques[i] = this.physics.add.sprite(60+(i*61),162,'carre').setOrigin(0,0);
+            briques[i].setDisplaySize(60,30);
+            briques[i].body.setAllowGravity(false);
+            briques[i].setImmovable(true);
+        }
+        for(let i=1; i<=9; i++){
+            briques[i] = this.physics.add.sprite(60+(i*61),193,'carre').setOrigin(0,0);
+            briques[i].setDisplaySize(60,30);
+            briques[i].body.setAllowGravity(false);
+            briques[i].setImmovable(true);
+        }
+        for(let i=1; i<=9; i++){
+            briques[i] = this.physics.add.sprite(60+(i*61),224,'carre').setOrigin(0,0);
+            briques[i].setDisplaySize(60,30);
+            briques[i].body.setAllowGravity(false);
+            briques[i].setImmovable(true);
+        }
+
+
+        //joueur
 
         //colliders
 
@@ -52,33 +89,23 @@ class Tableau1 extends Phaser.Scene{
         this.physics.add.collider(this.raquette,this.gauche);
 
         this.physics.add.collider(this.balle,this.raquette, function (){
-            me.rebond(me.gauche);
+            me.rebond(me.raquette);
         });
 
         this.initKeyboard();
     }
 
-    Initiale (){
-        //fonction pour initialiser la vitesse et la direction de la balle au début d'un round
-        this.balle.setX(this.largeur/2);
-        this.balle.setY(this.hauteur/2);
-
-        let pourcent = Phaser.Math.Between(0, 100)
-
-        if (pourcent >= 50){
-            this.balle.setVelocityX(200);
+    reset(){
+        if(this.balle.y>800){
+            this.balle.setX(this.largeur/2);
+            this.balle.setY(this.hauteur/2);
+            this.balle.setVelocityX(0);
+            this.balle.setVelocityY(200);
         }
-        if (pourcent < 50){
-            this.balle.setVelocityX(-200);
-        }
-
-        this.balle.setVelocityY(0);
-
     }
-
     rebond(raquette){
 
-        let hauteurRaquette = raquette.displayHeight;
+        let hauteurRaquette = raquette.displayWidth;
 
         let positionRelativeRaquette = (this.balle.x - raquette.x);
 
@@ -93,8 +120,8 @@ class Tableau1 extends Phaser.Scene{
     }
 
     win(joueur){
+
         joueur.score ++;
-        this.Initiale();
     }
 
 
@@ -106,11 +133,21 @@ class Tableau1 extends Phaser.Scene{
 
             switch (kevent.keyCode) {
                 case Phaser.Input.Keyboard.KeyCodes.LEFT:
-                    me.raquette.setVelocityX(-200);
+                    if(me.raquette.x<20){
+                        me.raquette.setVelocityX(0)
+                    }
+                    else{
+                        me.raquette.setVelocityX(-450);
+                    }
                     break;
 
                 case Phaser.Input.Keyboard.KeyCodes.RIGHT:
-                    me.raquette.setVelocityX(200);
+                    if(me.raquette.x>630){
+                        me.raquette.setVelocityX(0)
+                    }
+                    else{
+                        me.raquette.setVelocityX(450);
+                    }
                     break;
 
             }
@@ -130,6 +167,6 @@ class Tableau1 extends Phaser.Scene{
     }
 
     update(){
-
+        this.reset()
     }
 }

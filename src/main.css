@@ -31,7 +31,7 @@ canvas{
 
 #scores{
     color: #ffffff;
-    font-size : 3vw;
+    font-size : 1vw;
     display: flex;
     justify-content: left;
     position: absolute;
@@ -40,10 +40,10 @@ canvas{
 }
 
 .score{
-    color:#f00
+    color: #ffffff
 }
-.name{
-    font-size: 2vw;
+.vies{
+    font-size: 1vw;
 }
 
 #scores >* {
